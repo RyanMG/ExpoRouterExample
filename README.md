@@ -1,6 +1,6 @@
-# Expo App Example
+# Expo App Login Page Example
 
-## Login page and tab navigation
+**Login page and tab navigation**
 
 This is a sample application showing how you can setup login flows for your Expo application.
 
