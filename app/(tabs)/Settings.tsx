@@ -1,9 +1,18 @@
 import {View, Text} from "react-native";
 
-export default function Setup() {
+export default function Settings() {
   return (
-    <View>
-      <Text>Setup</Text>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#FFFFFF'
+      }}
+    >
+      <Text>Settings</Text>
     </View>
   );
 }

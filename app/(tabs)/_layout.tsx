@@ -1,35 +1,44 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import {ReactNode} from "react";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function TabLayout(): ReactNode {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
+        tabBarLabelPosition: "beside-icon",
+        tabBarLabelStyle: {
+          fontWeight: "700",
+          margin: 0,
+          fontSize: 15
+        },
+        tabBarActiveTintColor: 'blue',
+        tabBarStyle: {
+          backgroundColor: '#DDDDDD',
+        },
+        tabBarActiveBackgroundColor: '#CCCCCC',
+        tabBarIconStyle: { display: "none" }
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          tabBarLabel: "Home",
+          tabBarIcon: ({ focused, color, size }) => null
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="Users"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          tabBarLabel: "Users",
+          tabBarIcon: ({ focused, color, size }) => null
+        }}
+      />
+      <Tabs.Screen
+        name="Settings"
+        options={{
+          tabBarLabel: "Settings",
+          tabBarIcon: ({ focused, color, size }) => null
         }}
       />
     </Tabs>

@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useContext} from "react";
 import {View, Text, Button} from "react-native";
 
-export default function Home() {
+export default function Index() {
   const {setUserLoggedIn} = useContext(AuthContext);
   const logout = () => {
     Promise.all([
@@ -16,7 +16,16 @@ export default function Home() {
   }
 
   return (
-    <View>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#FFFFFF'
+      }}
+    >
       <Text>Home</Text>
       <Button title={"Logout"} onPress={logout}/>
     </View>
