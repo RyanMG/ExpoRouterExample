@@ -15,3 +15,16 @@ side effects from the rest of the application.
 So I decided to set up a clean, empty expo project and focus just on the immediate need: if the user is not logged in, direct them to /login. Once they
 do log in, store their credentials and route them back to the main application in root (which should itself set up a tabs flow, matching what my application
 will use).
+
+## Testing it out
+Pull the repo down, `npm install` then start it up with `npm start`. 
+`w` will load the sample app into a web browser.
+`i` will load the sample app into the iOS simulator, if you have it set up
+
+## How it works
+For anyone who doesnt already understand how Expo file based path routing works (I assume why you are here), an explanation of the file structure.
+
+`app/_layout.tsx` is the root view of the application.
+`login/_layout.tsx` is the login page, for when the user is not "logged in"
+`(tabs)/*` is the tab based navigation and associated pages 
+`providers/AuthProvider.tsx` handles routing the user based on their logged in state
