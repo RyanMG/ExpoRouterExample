@@ -20,7 +20,7 @@ const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
   const rootSegment = useSegments();
 
   useEffect(() => {
-    const fetchUser = async ():Promise<void> => {
+    (() => async ():Promise<void> => {
       const userIdPromise = AsyncStorage.getItem('@user');
       const tokenPromise = AsyncStorage.getItem('@token');
       const [
@@ -34,9 +34,7 @@ const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
       if (userId && token) {
         setUserLoggedIn(true);
       }
-    };
-
-    fetchUser();
+    })()
   }, []);
 
   useEffect(() => {
