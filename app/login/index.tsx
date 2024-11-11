@@ -1,7 +1,6 @@
 import {AuthContext} from "@/providers/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {router} from "expo-router";
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import {Button, Text, View} from "react-native";
 
 export default function Login() {
