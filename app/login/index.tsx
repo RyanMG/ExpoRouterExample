@@ -1,11 +1,11 @@
 import {AuthContext} from "@/providers/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useContext} from "react";
+import {ReactNode, useContext} from "react";
 import {Button, Text, View} from "react-native";
 
-export default function Login() {
+export default function Login(): ReactNode {
   const {setUserLoggedIn} = useContext(AuthContext);
-  const login = () => {
+  const login = ():void => {
     Promise.all([
       AsyncStorage.setItem('@user', '1'),
       AsyncStorage.setItem('@token', 'abc')

@@ -1,6 +1,7 @@
+import {ReactNode} from "react";
 import {View, Text} from "react-native";
 
-export default function Users() {
+export default function Users(): ReactNode {
   return (
     <View
       style={{
