@@ -12,7 +12,7 @@ export default function Users() {
         backgroundColor: '#FFFFFF'
       }}
     >
-      <Text>Crew</Text>
+      <Text>Users</Text>
     </View>
   );
 }
