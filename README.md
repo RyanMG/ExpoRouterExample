@@ -24,7 +24,7 @@ Pull the repo down, `npm install` then start it up with `npm start`.
 ## How it works
 For anyone who doesnt already understand how Expo file based path routing works (I assume why you are here), an explanation of the file structure.
 
-`app/_layout.tsx` is the root view of the application.
-`login/_layout.tsx` is the login page, for when the user is not "logged in"
-`(tabs)/*` is the tab based navigation and associated pages 
-`providers/AuthProvider.tsx` handles routing the user based on their logged in state
+1. `app/_layout.tsx` is the root view of the application.
+2. `login/_layout.tsx` is the login page, for when the user is not "logged in"
+3. `(tabs)/*` is the tab based navigation and associated pages 
+4. `providers/AuthProvider.tsx` handles routing the user based on their logged in state
