@@ -19,7 +19,7 @@ const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
-    (() => async ():Promise<void> => {
+    (async ():Promise<void> => {
       const userIdPromise = AsyncStorage.getItem('@user');
       const tokenPromise = AsyncStorage.getItem('@token');
       const [
