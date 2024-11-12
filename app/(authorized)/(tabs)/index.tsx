@@ -1,19 +1,11 @@
-import {AuthContext} from "@/providers/AuthProvider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useContext} from "react";
+import {useAuthSession} from "@/providers/AuthProvider";
 import {View, Text, Button} from "react-native";
 
 export default function Index() {
   console.log('HOME render');
-  const {setUserLoggedIn} = useContext(AuthContext);
+  const {signOut} = useAuthSession()
   const logout = () => {
-    Promise.all([
-      AsyncStorage.setItem('@user', '-1'),
-      AsyncStorage.setItem('@token', '')
-    ])
-      .then(() => {
-        setUserLoggedIn(false);
-      });
+     signOut();
   }
 
   return (

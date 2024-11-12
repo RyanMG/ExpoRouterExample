@@ -1,61 +1,55 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {createContext, ReactNode, useEffect, useState, Dispatch, SetStateAction} from 'react';
+import {router} from "expo-router";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from 'react';
 
-interface IAuthProvider {
-  token: string;
-  setToken: Dispatch<SetStateAction<string>>;
-  userId: number;
-  setUserId: Dispatch<SetStateAction<number>>;
-  userLoggedIn: boolean;
-  setUserLoggedIn: Dispatch<SetStateAction<boolean>>;
-  isLoading: boolean;
+const AuthContext = createContext<{
+  signIn: (arg0: string) => void;
+  signOut: () => void
+  token: string | null;
+}>({
+  signIn: () => null,
+  signOut: () => null,
+  token: null
+});
+
+// This hook can be used to access the user info.
+export function useAuthSession() {
+  return useContext(AuthContext);
 }
 
-const AuthContext = createContext({} as IAuthProvider);
-
-const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
-  const [token, setToken] = useState<string>('');
-  const [userId, setUserId] = useState<number>(-1);
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+export default function AuthProvider  ({children}:{children: ReactNode}): ReactNode {
+  const [token, setToken] = useState<string|null>(null);
 
   useEffect(() => {
-    console.log('1');
     (async ():Promise<void> => {
-      console.log('2');
-      const userIdPromise = AsyncStorage.getItem('@user');
-      const tokenPromise = AsyncStorage.getItem('@token');
-      const [
-        userId,
-        token
-      ] = await Promise.all([userIdPromise, tokenPromise]);
-
-      setUserId(Number(userId) || -1);
+      const token = await AsyncStorage.getItem('@token');
+      console.log('setting token');
       setToken(token || '');
-      console.log('userId', userId);
-      console.log('token', token);
-      if (userId && token) {
-        console.log('setting user logged in from auth provider startup');
-        setUserLoggedIn(true);
-      }
-      setIsLoading(false);
     })()
+  }, []);
+
+  const signIn = useCallback(async (token: string) => {
+    console.log('setting token in local storage', token);
+    await AsyncStorage.setItem('@token', token);
+    console.log('setting token state with', token);
+    setToken(token);
+    router.replace('/')
+  }, []);
+
+  const signOut = useCallback(async () => {
+    await AsyncStorage.setItem('@token', '');
+    setToken('');
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        token,
-        setToken,
-        userId,
-        setUserId,
-        userLoggedIn,
-        setUserLoggedIn,
-        isLoading
-      }}>
+        signIn,
+        signOut,
+        token
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
-
-export {AuthContext, AuthProvider};

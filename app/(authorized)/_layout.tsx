@@ -1,21 +1,22 @@
-import {AuthContext} from "@/providers/AuthProvider";
+import {useAuthSession} from "@/providers/AuthProvider";
 import {Redirect, Stack} from 'expo-router';
 import {Text} from 'react-native';
-import {ReactNode, useContext} from "react";
+import {ReactNode} from "react";
 
 export default function RootLayout(): ReactNode {
   console.log('authorized root render');
-  const {userLoggedIn, isLoading} = useContext(AuthContext);
+  const {token} = useAuthSession()
 
-  if (isLoading) {
+  if (token === null) {
+    console.log('isLoading');
     return <Text>Loading...</Text>;
   }
 
-  if (!userLoggedIn) {
-    console.log('userLoggedIn is', userLoggedIn);
+  if (token === '') {
+    console.log('userLoggedIn is false because token is ', token);
     return <Redirect href="/login" />;
   }
-
+  console.log('all good');
   return (
     <Stack
       screenOptions={{

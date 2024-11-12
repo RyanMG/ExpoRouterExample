@@ -1,21 +1,12 @@
-import {AuthContext} from "@/providers/AuthProvider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {router} from "expo-router";
-import {ReactNode, useContext} from "react";
+import {useAuthSession} from "@/providers/AuthProvider";
+import {ReactNode} from "react";
 import {Button, Text, View} from "react-native";
 
 export default function Login(): ReactNode {
   console.log('login render');
-  const {setUserLoggedIn} = useContext(AuthContext);
+  const {signIn} = useAuthSession();
   const login = ():void => {
-    Promise.all([
-      AsyncStorage.setItem('@user', '1'),
-      AsyncStorage.setItem('@token', 'abc')
-    ])
-      .then(() => {
-        setUserLoggedIn(true);
-        router.replace("/");
-      });
+    signIn("1234.abcd");
   }
 
   return (
