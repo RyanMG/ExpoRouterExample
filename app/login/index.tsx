@@ -1,9 +1,11 @@
 import {AuthContext} from "@/providers/AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {router} from "expo-router";
 import {ReactNode, useContext} from "react";
 import {Button, Text, View} from "react-native";
 
 export default function Login(): ReactNode {
+  console.log('login render');
   const {setUserLoggedIn} = useContext(AuthContext);
   const login = ():void => {
     Promise.all([
@@ -12,6 +14,7 @@ export default function Login(): ReactNode {
     ])
       .then(() => {
         setUserLoggedIn(true);
+        router.replace("/");
       });
   }
 

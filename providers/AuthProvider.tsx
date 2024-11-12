@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {router, useSegments} from "expo-router";
+import {router} from "expo-router";
 import {createContext, ReactNode, useEffect, useState, Dispatch, SetStateAction} from 'react';
 
 interface IAuthProvider {
@@ -17,7 +17,6 @@ const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
   const [token, setToken] = useState<string>('');
   const [userId, setUserId] = useState<number>(-1);
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
-  const rootSegment = useSegments();
 
   useEffect(() => {
     (() => async ():Promise<void> => {
@@ -36,24 +35,6 @@ const AuthProvider = ({children}:{children: ReactNode}): ReactNode => {
       }
     })()
   }, []);
-
-  useEffect(() => {
-    if (rootSegment[0] === 'login' && userLoggedIn) {
-      router.replace('/');
-    }
-
-    if (rootSegment[0] !== 'login' && !userLoggedIn) {
-      router.replace('/login');
-    }
-  }, [rootSegment]);
-
-  useEffect(() => {
-    if (userLoggedIn) {
-      router.replace('/');
-    } else {
-      router.replace('/login');
-    }
-  }, [userLoggedIn]);
 
   return (
     <AuthContext.Provider

@@ -1,17 +1,12 @@
 import {AuthProvider} from "@/providers/AuthProvider";
-import { Stack } from 'expo-router';
+import {Slot} from "expo-router";
 import {ReactNode} from "react";
 
 export default function RootLayout(): ReactNode {
+  console.log('root render');
   return (
     <AuthProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-      </Stack>
+      <Slot />
     </AuthProvider>
   );
 }

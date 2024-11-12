@@ -4,6 +4,7 @@ import {useContext} from "react";
 import {View, Text, Button} from "react-native";
 
 export default function Index() {
+  console.log('HOME render');
   const {setUserLoggedIn} = useContext(AuthContext);
   const logout = () => {
     Promise.all([
