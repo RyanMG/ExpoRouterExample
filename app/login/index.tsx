@@ -1,4 +1,5 @@
 import {useAuthSession} from "@/providers/AuthProvider";
+import Uuid from "expo-modules-core/src/uuid";
 import {ReactNode} from "react";
 import {Button, Text, View} from "react-native";
 
@@ -6,7 +7,8 @@ export default function Login(): ReactNode {
   console.log('login render');
   const {signIn} = useAuthSession();
   const login = ():void => {
-    signIn("1234.abcd");
+    const random: string = Uuid.v4();
+    signIn(random);
   }
 
   return (
