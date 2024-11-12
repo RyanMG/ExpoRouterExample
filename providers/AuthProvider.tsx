@@ -26,16 +26,13 @@ export default function AuthProvider  ({children}:{children: ReactNode}): ReactN
   useEffect(() => {
     (async ():Promise<void> => {
       const token = await AsyncStorage.getItem('@token');
-      console.log('setting token');
       tokenRef.current = token || '';
       setIsLoading(false);
     })()
   }, []);
 
   const signIn = useCallback(async (token: string) => {
-    console.log('setting token in local storage', token);
     await AsyncStorage.setItem('@token', token);
-    console.log('setting token ref with', token);
     tokenRef.current = token;
     router.replace('/')
   }, []);

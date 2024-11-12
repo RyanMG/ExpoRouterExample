@@ -3,7 +3,6 @@ import {useState} from "react";
 import {View, Text, Button} from "react-native";
 
 export default function Index() {
-  console.log('HOME render');
   const {signOut, token} = useAuthSession()
   const [tokenInUi, setTokenInUi] = useState<null|string|undefined>(null)
 

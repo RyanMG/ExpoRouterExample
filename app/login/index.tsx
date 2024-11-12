@@ -4,7 +4,6 @@ import {ReactNode} from "react";
 import {Button, Text, View} from "react-native";
 
 export default function Login(): ReactNode {
-  console.log('login render');
   const {signIn} = useAuthSession();
   const login = ():void => {
     const random: string = Uuid.v4();
