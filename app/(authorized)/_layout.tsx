@@ -5,14 +5,14 @@ import {ReactNode} from "react";
 
 export default function RootLayout(): ReactNode {
   console.log('authorized root render');
-  const {token} = useAuthSession()
+  const {token, isLoading} = useAuthSession()
 
-  if (token === null || token.current === null) {
+  if (isLoading) {
     console.log('isLoading');
     return <Text>Loading...</Text>;
   }
 
-  if (token.current === '') {
+  if (token?.current === '') {
     console.log('userLoggedIn is false because token is ', token);
     return <Redirect href="/login" />;
   }
