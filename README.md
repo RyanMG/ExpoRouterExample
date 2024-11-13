@@ -18,6 +18,9 @@ So I decided to set up a clean, empty expo project and focus just on the immedia
 do log in, store their credentials and route them back to the main application in root (which should itself set up a tabs flow, matching what my application
 will use).
 
+I wrote about the process and the code here
+https://medium.com/@david.ryan.hall/setting-up-a-basic-login-flow-for-an-expo-application-0b62b2b3e448
+
 ## Testing it out
 Pull the repo down, `npm install` then start it up with `npm start`. 
 `w` will load the sample app into a web browser.
